@@ -1,0 +1,26 @@
+_format_version: "3.0"
+
+services:
+  - name: post-service
+    url: http://host.docker.internal:8080  # Use host.docker.internal to refer to the host machine
+    routes:
+      - paths:
+          - /post_service
+    plugins:
+      - name: jwt
+        config:
+          secret_is_base64: false
+
+  - name: user-service
+    url: http://localhost:8081
+    routes:
+      - paths:
+          - /user_service
+
+consumers:
+  - username: post-consumer
+
+jwt_secrets:
+  - consumer: post-consumer
+    secret: my_secret_key
+    key: post-consumer
