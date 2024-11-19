@@ -2,7 +2,7 @@ POST http://localhost:8080/auth/login
 Content-Type: application/json
 
 {
-  "email": "admin@miu.edu",
+  "username": "admin1@miu.edu",
   "password": "password"
 }
 
@@ -12,6 +12,6 @@ POST http://localhost:8080/auth/login
 Content-Type: application/json
 
 {
-  "email": "user1@miu.edu",
+  "username": "user1@miu.edu",
   "password": "password"
 }
