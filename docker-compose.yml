@@ -7,10 +7,12 @@ services:
     environment:
       - KONG_DATABASE=off
       - KONG_DECLARATIVE_CONFIG=/usr/local/kong/kong.yml
+      - KONG_PLUGINS=bundled,jwt_parser
     volumes:
       - /Users/sonthach/projects/miu-ea-project/kong.yml:/usr/local/kong/kong.yml:ro
+      - ./kong/custom_plugins/jwt_parser:/usr/local/share/lua/5.1/kong/plugins/jwt_parser
     ports:
-      - "8000:8000"  # Proxy port (HTTP)
-      - "8443:8443"  # Proxy port (HTTPS)
-      - "8001:8001"  # Admin API (HTTP)
-      - "8444:8444"  # Admin API (HTTPS)
+      - "8000:8000"
+      - "8443:8443"
+      - "8001:8001"
+      - "8444:8444"
