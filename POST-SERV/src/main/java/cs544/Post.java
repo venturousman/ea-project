@@ -1,9 +1,7 @@
 package cs544;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import  cs544.User;
 
 @Entity
 public class Post {
@@ -12,6 +10,9 @@ public class Post {
     private Long id;
     private String title;
     private String content;
+    @ManyToOne
+    private User user;
+
 
     // Getters and Setters
     public Long getId() {
@@ -36,5 +37,9 @@ public class Post {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }
