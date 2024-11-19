@@ -65,6 +65,9 @@ public class JWTAuthFilter extends OncePerRequestFilter {
         // lastname);
         // user.setId(userId);
 
+        // NOTE: if use cs544.models.User, .getAuthorities method will have no prefix ROLE_, just Admin / User
+        // coz we're using UserDetails, it has prefix ROLE_, .requestMatchers("/users/**").hasAuthority("ROLE_Admin")
+
         UserDetails userDetails = User.withUsername(username).password("doesn't like empty").roles(roles).build();
         var token = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
         token.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
