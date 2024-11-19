@@ -1,0 +1,14 @@
+### GET request to example server
+POST http://localhost:8000/user_service/auth/login
+Content-Type: application/json
+
+{
+  "username": "admin1@miu.edu",
+  "password": "password"
+}
+
+###
+
+
+GET http://localhost:8000/post_service/books
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJtaXUuZWEuZ3JvdXAzIiwiZXhwIjoxNzMyMDM5NjU0fQ.4SgQjphH1crThKdIk1WD97IEwIXi3NCH9fPb54s81Ns

@@ -2,7 +2,7 @@ _format_version: "3.0"
 
 services:
   - name: post-service
-    url: http://host.docker.internal:8080  # Use host.docker.internal to refer to the host machine
+    url: http://host.docker.internal:8081  # Use host.docker.internal to refer to the host machine
     routes:
       - paths:
           - /post_service
@@ -12,7 +12,7 @@ services:
           secret_is_base64: false
 
   - name: user-service
-    url: http://localhost:8081
+    url: http://host.docker.internal:8080
     routes:
       - paths:
           - /user_service
