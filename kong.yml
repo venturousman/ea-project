@@ -22,5 +22,5 @@ consumers:
 
 jwt_secrets:
   - consumer: post-consumer
-    secret: my_secret_key
-    key: post-consumer
+    secret: epVbQZQxG3N2WDN2XtKCCV8sJPmuTEna1QifL2FrbKw=
+    key: miu.ea.group3
