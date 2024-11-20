@@ -31,11 +31,10 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(
                         auth -> auth
-//                                .requestMatchers("/auth/**").permitAll()
-//                                .requestMatchers("/users/**").hasAuthority("ROLE_Admin")
+                                // .requestMatchers("/auth/**").permitAll()
+                                .requestMatchers("/roles/**").hasAuthority("ROLE_Admin")
                                 .requestMatchers("/users/**").hasRole("Admin") // the same above
-                                .anyRequest().permitAll()
-                )
+                                .anyRequest().permitAll())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider())
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)

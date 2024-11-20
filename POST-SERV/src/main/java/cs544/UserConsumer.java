@@ -19,6 +19,7 @@ public class UserConsumer {
 
     @KafkaListener(topics = "user_topic", groupId = "user-group")
     public void consume(UserEvent userEvent) {
+        System.out.println("### Consumed message: " + userEvent);
         logger.error("Consumed message: {}", userEvent);
         // Process the userEvent as needed
     }
