@@ -2,15 +2,25 @@ package cs544.dto;
 
 import java.io.Serializable;
 
+import cs544.models.User;
+
 public class UserDto implements Serializable {
     private static final long serialVersionUID = 1L;
     private Long id;
     private String username;
-    private String password;
+    // private String password;
     private String firstname;
     private String lastname;
 
     public UserDto() {
+    }
+
+    public UserDto(User user) {
+        this.id = user.getId();
+        this.username = user.getUsername();
+        // this.password = user.getPassword();
+        this.firstname = user.getFirstname();
+        this.lastname = user.getLastname();
     }
 
     // getters & setters
@@ -30,13 +40,13 @@ public class UserDto implements Serializable {
         this.username = username;
     }
 
-    public String getPassword() {
-        return password;
-    }
+    // public String getPassword() {
+    // return password;
+    // }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
+    // public void setPassword(String password) {
+    // this.password = password;
+    // }
 
     public String getFirstname() {
         return firstname;
@@ -55,9 +65,12 @@ public class UserDto implements Serializable {
     }
 
     // methods
-    // @Override
-    // public String toString() {
-    // return "[" + id + ", " + title + ", " + ISBN + ", " + author + ", " + price +
-    // "]";
-    // }
+    @Override
+    public String toString() {
+        return "User{"
+                + "id=" + id
+                + ", firstname='" + firstname
+                + "', lastname='" + lastname
+                + "', username='" + username + "'}";
+    }
 }

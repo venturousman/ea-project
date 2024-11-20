@@ -1,22 +1,22 @@
 ### GET request to example server
 GET http://localhost:8080/users
-#Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbjFAbWl1LmVkdSIsImZpcnN0bmFtZSI6IkFsYW4iLCJyb2xlcyI6WyJBZG1pbiJdLCJsYXN0bmFtZSI6IlNtaXRoIiwiaWF0IjoxNzMyMDM3NzYxLCJleHAiOjE3MzIwNDEzNjEsImlzcyI6Im1pdS5lYS5ncm91cDMifQ.Os0COf9_L9WCZCRBaCzRQhIdY6m9c0yp_6RO9Ov-TVg
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyMUBtaXUuZWR1IiwiZmlyc3RuYW1lIjoiSGVsZW4iLCJyb2xlcyI6WyJVc2VyIl0sImxhc3RuYW1lIjoiUGVhcnNvbiIsImlhdCI6MTczMjAzNzgwNSwiZXhwIjoxNzMyMDQxNDA1LCJpc3MiOiJtaXUuZWEuZ3JvdXAzIn0.EeWgG0J3MR-QbV19tZBKeaAdxYCGlT1WPX8iiyLOldo
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbjFAbWl1LmVkdSIsImZpcnN0bmFtZSI6IkFsYW4iLCJyb2xlcyI6WyJBZG1pbiJdLCJsYXN0bmFtZSI6IlNtaXRoIiwiaWF0IjoxNzMyMDY5MzMxLCJleHAiOjE3MzIwNzI5MzEsImlzcyI6Im1pdS5lYS5ncm91cDMifQ.WSA-rs7re1bpQ8sWrAm9rilHTHt1SL3tz7DAWeT3fN8
+#Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyMUBtaXUuZWR1IiwiZmlyc3RuYW1lIjoiSGVsZW4iLCJyb2xlcyI6WyJVc2VyIl0sImxhc3RuYW1lIjoiUGVhcnNvbiIsImlhdCI6MTczMjA2OTMxNCwiZXhwIjoxNzMyMDcyOTE0LCJpc3MiOiJtaXUuZWEuZ3JvdXAzIn0.UfAJiQ_ehaoq6PWNCt54q-MA0Cd_6WGekib3wdFY2eA
 
 ###
 GET http://localhost:8080/users/1
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbjFAbWl1LmVkdSIsImZpcnN0bmFtZSI6IkFsYW4iLCJyb2xlcyI6WyJBZG1pbiJdLCJsYXN0bmFtZSI6IlNtaXRoIiwiaWF0IjoxNzMyMDMyNTAyLCJleHAiOjE3MzIwMzYxMDIsImlzcyI6Im1pdS5lYS5ncm91cDMifQ.rFO75sIELfHsOCS_ysYSjwMfDojNuO4Czi1mBmIfHeE
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbjFAbWl1LmVkdSIsImZpcnN0bmFtZSI6IkFsYW4iLCJyb2xlcyI6WyJBZG1pbiJdLCJsYXN0bmFtZSI6IlNtaXRoIiwiaWF0IjoxNzMyMDY5MzMxLCJleHAiOjE3MzIwNzI5MzEsImlzcyI6Im1pdS5lYS5ncm91cDMifQ.WSA-rs7re1bpQ8sWrAm9rilHTHt1SL3tz7DAWeT3fN8
 
 ###
-#POST http://localhost:8080/users
-#Content-Type: application/json
-#
-#{
-#  "title": "Beginning Java 8 Fundamentals",
-#  "author": "Kishori Sharan",
-#  "isbn": "978-0-306-40615-7",
-#  "price": 49
-#}
+POST http://localhost:8080/users
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbjFAbWl1LmVkdSIsImZpcnN0bmFtZSI6IkFsYW4iLCJyb2xlcyI6WyJBZG1pbiJdLCJsYXN0bmFtZSI6IlNtaXRoIiwiaWF0IjoxNzMyMDY5MzMxLCJleHAiOjE3MzIwNzI5MzEsImlzcyI6Im1pdS5lYS5ncm91cDMifQ.WSA-rs7re1bpQ8sWrAm9rilHTHt1SL3tz7DAWeT3fN8
+Content-Type: application/json
+
+{
+  "username": "user3@miu.edu",
+  "firstname": "Kishori",
+  "lastname": "Sharan"
+}
 
 ### update
 #PUT http://localhost:8080/users/4

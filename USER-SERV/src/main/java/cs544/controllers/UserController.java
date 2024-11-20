@@ -43,7 +43,7 @@ public class UserController {
 
     @PostMapping
     public ResponseEntity<User> add(@RequestBody User user) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(userService.saveUser(user));
+        return ResponseEntity.status(HttpStatus.CREATED).body(userService.add(user));
     }
 
     @PutMapping("/{id}")
@@ -53,7 +53,7 @@ public class UserController {
             return ResponseEntity.notFound().build();
         }
         user.setId(id);
-        return ResponseEntity.ok(userService.saveUser(user));
+        return ResponseEntity.ok(userService.update(user));
     }
 
     @DeleteMapping("/{id}")
