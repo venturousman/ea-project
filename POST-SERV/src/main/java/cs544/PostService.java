@@ -1,6 +1,8 @@
 package cs544;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,6 +15,14 @@ public class PostService {
     @Autowired
     public PostService(PostRepository postRepository) {
         this.postRepository = postRepository;
+    }
+
+    public Page<Post> getAllPosts(Pageable pageable) {
+        return postRepository.findAll(pageable);
+    }
+
+    public Page<Post> getPostsByTitle(Pageable pageable, String title) {
+        return postRepository.findByTitleContaining(pageable, title);
     }
 
     public List<Post> getAllPosts() {

@@ -1,6 +1,9 @@
 package cs544;
 
 import org.springframework.beans.factory.annotation.Autowired;
+// import org.springframework.data.domain.Page;
+// import org.springframework.data.domain.PageRequest;
+// import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,8 +26,17 @@ public class PostController {
         this.postService = postService;
     }
 
+    // @GetMapping
+    // public Page<Post> getAllPosts(
+    // @RequestParam(defaultValue = "0") int page,
+    // @RequestParam(defaultValue = "10") int size) {
+    // Pageable pageable = PageRequest.of(page, size);
+    // return postService.getAllPosts(pageable);
+    // }
+
     @GetMapping
-    public List<Post> getAllPosts(@RequestHeader Map<String, String> headers, @RequestBody(required = false) String body) {
+    public List<Post> getAllPosts(@RequestHeader Map<String, String> headers,
+            @RequestBody(required = false) String body) {
 
         headers.forEach((key, value) -> System.out.println(key + ": " + value));
         if (body != null) {
@@ -49,7 +61,8 @@ public class PostController {
     }
 
     @PutMapping("/{id}")
-    public Post updatePost(@RequestHeader("x-user-email") String email, @PathVariable Long id, @RequestBody Post postDetails) {
+    public Post updatePost(@RequestHeader("x-user-email") String email, @PathVariable Long id,
+            @RequestBody Post postDetails) {
         User user = userService.findByEmail(email);
         if (user == null) {
             return null;
