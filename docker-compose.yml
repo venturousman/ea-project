@@ -20,4 +20,68 @@ services:
     image: 'apache/kafka:3.9.0'
     ports:
       - '9092:9092'
+  mysql-post:
+    image: mysql:8.0
+    container_name: mysql-post
+    environment:
+      MYSQL_DATABASE: cs544-post
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql-post-data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h localhost"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
 
+  mysql-user:
+    image: mysql:8.0
+    container_name: mysql-user
+    environment:
+      MYSQL_DATABASE: cs544-user
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql-user-data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h localhost"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
+  post-service:
+    build: ./POST-SERV
+    container_name: post-serv
+    ports:
+      - "8081:8081"
+    environment:
+      MYSQL_HOST: mysql-post
+      MYSQL_DB: cs544-post
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root
+      SERVER_PORT: 8081
+      KAFKA_BOOTSTRAP_SERVERS: kafka:9092
+    depends_on:
+      - mysql-post
+
+  user-serv:
+    build: ./USER-SERV
+    container_name: user-serv
+    ports:
+      - "8080:8080"
+    environment:
+      MYSQL_HOST: mysql-user
+      MYSQL_DB: cs544-user
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root
+      SERVER_PORT: 8080
+      KAFKA_BOOTSTRAP_SERVERS: kafka:9092
+    depends_on:
+      - mysql-user
+
+volumes:
+  mysql-post-data:
+  mysql-user-data:
