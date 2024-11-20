@@ -9,6 +9,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 // import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -18,15 +19,20 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 
+@Schema(description = "Details about a user")
 @Entity
 // public class User implements UserDetails {
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Schema(description = "The unique identifier of the user")
     private Long id;
+    @Schema(description = "The email/username of the user")
     private String username;
     private String password;
+    @Schema(description = "The firstname of the user")
     private String firstname;
+    @Schema(description = "The lastname of the user")
     private String lastname;
 
     @ManyToMany // (cascade = CascadeType.ALL)
