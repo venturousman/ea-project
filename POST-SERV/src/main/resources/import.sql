@@ -1,3 +1,4 @@
-INSERT INTO Book VALUES(NULL, 35.0, 'Robert C. Martin','978-0132350884', 'Clean Code: A Handbook of Agile Software Craftsmanship');
-INSERT INTO Book VALUES(NULL, 40.25, 'Andrew Hunt and David Thomas','978-0135957059', 'The Pragmatic Programmer: Your Journey to Mastery');
-INSERT INTO Book VALUES(NULL, 50.75, 'Erich Gamma, Richard Helm, Ralph Johnson, John Vlissides', '978-0201633610',  'Design Patterns: Elements of Reusable Object-Oriented Software');
+INSERT INTO Post (title, content) VALUES ('First Post', 'This is the content of the first post.');
+INSERT INTO Post (title, content) VALUES ('Second Post', 'This is the content of the second post.');
+INSERT INTO Post (title, content) VALUES ('Third Post', 'This is the content of the third post.');
+INSERT INTO User (username, firstname, lastname) VALUES ('admin1@gmail.com', 'Alan', 'Smith');

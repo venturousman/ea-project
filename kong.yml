@@ -1,0 +1,24 @@
+_format_version: "3.0"
+
+services:
+  - name: post-service
+    url: http://host.docker.internal:8081
+    routes:
+      - paths:
+          - /post_service
+    plugins:
+      - name: jwt_parser
+
+  - name: user-service
+    url: http://host.docker.internal:8080
+    routes:
+      - paths:
+          - /user_service
+
+consumers:
+  - username: post-consumer
+
+jwt_secrets:
+  - consumer: post-consumer
+    secret: epVbQZQxG3N2WDN2XtKCCV8sJPmuTEna1QifL2FrbKw=
+    key: miu.ea.group3

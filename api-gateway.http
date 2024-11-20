@@ -1,0 +1,26 @@
+### GET request to example server
+POST http://localhost:8000/user_service/auth/login
+Content-Type: application/json
+
+{
+  "username": "admin1@miu.edu",
+  "password": "password"
+}
+
+###
+
+
+GET http://localhost:8000/post_service/posts
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhZG1pbkBnbWFpbC5jb20iLCJpc3MiOiJtaXUuZWEuZ3JvdXAzIiwiZXhwIjoxNzMyMDQ5OTI2LCJmaXJzdG5hbWUiOiJBbGFuIiwicm9sZXMiOlsiQWRtaW4iXSwibGFzdG5hbWUiOiJTbWl0aCIsImlhdCI6MTczMTk4MTY5OH0.YAq822-sPUpylSFJIbcNKWcD3ouuN90Wx7bJjtqJ1n8
+
+
+### Create a new post
+POST http://localhost:8000/post_service/posts
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhZG1pbkBnbWFpbC5jb20iLCJpc3MiOiJtaXUuZWEuZ3JvdXAzIiwiZXhwIjoxNzMyMDQ5OTI2LCJmaXJzdG5hbWUiOiJBbGFuIiwicm9sZXMiOlsiQWRtaW4iXSwibGFzdG5hbWUiOiJTbWl0aCIsImlhdCI6MTczMTk4MTY5OH0.YAq822-sPUpylSFJIbcNKWcD3ouuN90Wx7bJjtqJ1n8
+Content-Type: application/json
+
+{
+  "title": "New Post",
+  "content": "This is the content of the new post."
+}
+
