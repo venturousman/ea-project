@@ -23,7 +23,7 @@ public class UserEvent implements Serializable {
         return "UserEvent{" +
                 "eventType='" + eventType + '\'' +
                 ", userId=" + userId +
-                ", userData=" + userData.toString() +
+                ", userData=" + userData +
                 ", timestamp=" + timestamp +
                 '}';
     }
