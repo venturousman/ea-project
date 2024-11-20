@@ -7,8 +7,10 @@ GET http://localhost:8081/posts/1
 Accept: application/json
 
 ### Create a new post
+### Create a new post
 POST http://localhost:8081/posts
 Content-Type: application/json
+x-user-email: user3@miu.edu
 
 {
   "title": "New Post",
@@ -18,6 +20,7 @@ Content-Type: application/json
 ### Update a post
 PUT http://localhost:8081/posts/1
 Content-Type: application/json
+x-user-email: user3@miu.edu
 
 {
   "title": "Updated Post",
@@ -25,5 +28,6 @@ Content-Type: application/json
 }
 
 ### Delete a post
-DELETE http://localhost:8081/posts/1
+DELETE http://localhost:8081/posts/2
 Accept: application/json
+x-user-email: user3@miu.edu
