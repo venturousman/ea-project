@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import cs544.dto.UserDto;
 import cs544.dto.UserEvent;
+import cs544.models.Role;
 import cs544.models.User;
 import cs544.repositories.UserRepository;
 
@@ -35,7 +36,7 @@ public class UserService {
 
     public User add(User user) {
         user.setPassword("$2a$10$SKww238GdhtdxsBXxbf7JeI2dSHC5IkiACM1yZtA1pwaD2puWQDN2"); // default password
-        var u = userRepository.save(user);
+        User u = userRepository.save(user);
         // send message to kafka
         var dto = new UserDto(u);
         var evt = new UserEvent("CREATE", u.getId(), dto, System.currentTimeMillis());
@@ -44,7 +45,7 @@ public class UserService {
     }
 
     public User update(User user) {
-        var u = userRepository.save(user);
+        User u = userRepository.save(user);
         // send message to kafka
         var dto = new UserDto(u);
         var evt = new UserEvent("UPDATE", u.getId(), dto, System.currentTimeMillis());
@@ -57,6 +58,30 @@ public class UserService {
         // send message to kafka
         var evt = new UserEvent("DELETE", id, null, System.currentTimeMillis());
         kafkaProducer.sendMessage(evt);
+    }
+
+    // public User addRole(long userId, long roleId) {
+    // User user = userRepository.findById(userId).orElse(null);
+    // if (user == null) {
+    // throw new IllegalArgumentException("User not found");
+    // }
+    // Role role = roleRepository.findById(roleId).orElse(null);
+    // if (role == null) {
+    // throw new IllegalArgumentException("Role not found");
+    // }
+    // user.addRole(role);
+    // User updatedUser = userRepository.save(user);
+    // return updatedUser;
+    // }
+
+    public User addRole(User user, Role role) {
+        user.addRole(role);
+        User updatedUser = userRepository.save(user);
+        // send message to kafka
+        var dto = new UserDto(updatedUser);
+        var evt = new UserEvent("UPDATE", updatedUser.getId(), dto, System.currentTimeMillis());
+        kafkaProducer.sendMessage(evt);
+        return updatedUser;
     }
 
 }

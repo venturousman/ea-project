@@ -1,6 +1,8 @@
 package cs544.dto;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import cs544.models.User;
 
@@ -12,6 +14,8 @@ public class UserDto implements Serializable {
     private String firstname;
     private String lastname;
 
+    private List<RoleDto> roles = new ArrayList<>();
+
     public UserDto() {
     }
 
@@ -21,6 +25,7 @@ public class UserDto implements Serializable {
         // this.password = user.getPassword();
         this.firstname = user.getFirstname();
         this.lastname = user.getLastname();
+        user.getRoles().forEach(role -> this.roles.add(new RoleDto(role)));
     }
 
     // getters & setters
@@ -40,13 +45,13 @@ public class UserDto implements Serializable {
         this.username = username;
     }
 
-    // public String getPassword() {
-    // return password;
-    // }
+    public List<RoleDto> getRoles() {
+        return roles;
+    }
 
-    // public void setPassword(String password) {
-    // this.password = password;
-    // }
+    public void setRoles(List<RoleDto> roles) {
+        this.roles = roles;
+    }
 
     public String getFirstname() {
         return firstname;
@@ -71,6 +76,8 @@ public class UserDto implements Serializable {
                 + "id=" + id
                 + ", firstname='" + firstname
                 + "', lastname='" + lastname
-                + "', username='" + username + "'}";
+                + "', username='" + username
+                + "', roles=" + roles
+                + "}";
     }
 }

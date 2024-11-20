@@ -14,8 +14,8 @@ import jakarta.persistence.ManyToMany;
 public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    protected Long id;
-    protected String name;
+    private Long id;
+    private String name;
 
     @ManyToMany(mappedBy = "roles") // , cascade = CascadeType.ALL)
     private List<User> users = new ArrayList<>();

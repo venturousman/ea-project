@@ -14,17 +14,21 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import cs544.models.Role;
 import cs544.models.User;
+import cs544.services.RoleService;
 import cs544.services.UserService;
 
 @RestController
 @RequestMapping("/users")
 public class UserController {
     private final UserService userService;
+    private final RoleService roleService;
 
     @Autowired
-    public UserController(UserService userService) {
+    public UserController(UserService userService, RoleService roleService) {
         this.userService = userService;
+        this.roleService = roleService;
     }
 
     @GetMapping
@@ -43,7 +47,13 @@ public class UserController {
 
     @PostMapping
     public ResponseEntity<User> add(@RequestBody User user) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(userService.add(user));
+        User existingUser = userService.getUserByUsername(user.getUsername());
+        if (existingUser != null) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+            // return ResponseEntity.status(HttpStatus.CONFLICT).build();
+        }
+        User newUser = userService.add(user);
+        return ResponseEntity.status(HttpStatus.CREATED).body(newUser);
     }
 
     @PutMapping("/{id}")
@@ -64,5 +74,19 @@ public class UserController {
         }
         userService.delete(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @PostMapping("/{userId}/roles/{roleId}")
+    public ResponseEntity<User> addRole(@PathVariable long userId, @PathVariable long roleId) {
+        User existingUser = userService.getUserById(userId);
+        if (existingUser == null) {
+            return ResponseEntity.notFound().build();
+        }
+        Role existingRole = roleService.getRoleById(roleId);
+        if (existingRole == null) {
+            return ResponseEntity.notFound().build();
+        }
+        User updatedUser = userService.addRole(existingUser, existingRole);
+        return ResponseEntity.ok(updatedUser);
     }
 }

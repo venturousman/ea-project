@@ -19,7 +19,7 @@ import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 
 @Entity
-//public class User implements UserDetails {
+// public class User implements UserDetails {
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -52,7 +52,7 @@ public class User {
         this.id = id;
     }
 
-//    @Override
+    // @Override
     public String getUsername() {
         return username;
     }
@@ -61,7 +61,7 @@ public class User {
         this.username = username;
     }
 
-//    @Override
+    // @Override
     public String getPassword() {
         return password;
     }
@@ -104,12 +104,16 @@ public class User {
         return roles.stream().map(Role::getName).toArray(String[]::new);
     }
 
-//    @Override
-//    public Collection<? extends GrantedAuthority> getAuthorities() {
-//        return roles.stream()
-//                // .map(role -> new SimpleGrantedAuthority("ROLE_" + role.getName()))
-//                .map(role -> new SimpleGrantedAuthority(role.getName()))
-//                .collect(Collectors.toList());
-//    }
+    public List<Role> getRoles() {
+        return roles;
+    }
+
+    // @Override
+    // public Collection<? extends GrantedAuthority> getAuthorities() {
+    // return roles.stream()
+    // // .map(role -> new SimpleGrantedAuthority("ROLE_" + role.getName()))
+    // .map(role -> new SimpleGrantedAuthority(role.getName()))
+    // .collect(Collectors.toList());
+    // }
 
 }
