@@ -23,24 +23,23 @@ public class UserConsumer {
 
     @KafkaListener(topics = "user_topic", groupId = "user-group")
     public void consume(UserEvent userEvent) {
-        logger.error("Consumed message: {}", userEvent);
         if ("CREATE".equals(userEvent.getEventType())) {
             UserDto userDto = userEvent.getUserData();
             User user = new User(userDto);
             userService.createUser(user);
-            logger.info("User created: {}", user);
+            System.out.println("User created: {}"+ user);
         }
         // Handle other event types as needed
         else if ("UPDATE".equals(userEvent.getEventType())) {
             UserDto userDto = userEvent.getUserData();
             User user = new User(userDto);
             userService.updateUser(user);
-            logger.info("User updated: {}", user);
+            System.out.println("User updated: {}"+ user);
         }
         else if ("DELETE".equals(userEvent.getEventType())) {
             Long userId = userEvent.getUserId();
             userService.deleteUser(userId);
-            logger.info("User deleted with ID: {}", userId);
+            System.out.println("User deleted with ID: {}"+ userId);
         }
     }
 }
