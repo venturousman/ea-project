@@ -7,8 +7,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import cs544.dto.UserDto;
+import cs544.dto.UserEvent;
 import cs544.models.User;
-import cs544.repositories.RoleRepository;
 import cs544.repositories.UserRepository;
 
 @Service
@@ -38,7 +38,8 @@ public class UserService {
         var u = userRepository.save(user);
         // send message to kafka
         var dto = new UserDto(u);
-        kafkaProducer.sendMessage(dto);
+        var evt = new UserEvent("CREATE", u.getId(), dto, System.currentTimeMillis());
+        kafkaProducer.sendMessage(evt);
         return u;
     }
 
@@ -46,12 +47,16 @@ public class UserService {
         var u = userRepository.save(user);
         // send message to kafka
         var dto = new UserDto(u);
-        kafkaProducer.sendMessage(dto);
+        var evt = new UserEvent("UPDATE", u.getId(), dto, System.currentTimeMillis());
+        kafkaProducer.sendMessage(evt);
         return u;
     }
 
     public void delete(long id) {
         userRepository.deleteById(id);
+        // send message to kafka
+        var evt = new UserEvent("DELETE", id, null, System.currentTimeMillis());
+        kafkaProducer.sendMessage(evt);
     }
 
 }
