@@ -63,4 +63,8 @@ public class UserDto implements Serializable {
                 + "', lastname='" + lastname
                 + "', username='" + username + "'}";
     }
+
+    public String getEmail() {
+        return username;
+    }
 }

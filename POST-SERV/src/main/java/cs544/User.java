@@ -1,5 +1,6 @@
 package cs544;
 
+import cs544.dto.UserDto;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -16,6 +17,14 @@ public class User {
     private String email;
 
     public User() {
+    }
+
+    public User(UserDto userDto) {
+        this.id = userDto.getId();
+        this.username = userDto.getUsername();
+        this.firstname = userDto.getFirstname();
+        this.lastname = userDto.getLastname();
+        this.email = userDto.getEmail();
     }
 
     public User(String username, String firstname, String lastname) {

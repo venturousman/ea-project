@@ -1,7 +1,9 @@
 package cs544;
 
+import cs544.dto.UserDto;
 import cs544.dto.UserEvent;
-import jakarta.annotation.PostConstruct;
+import cs544.User;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
 import org.slf4j.Logger;
@@ -12,15 +14,33 @@ public class UserConsumer {
 
     private static final Logger logger = LoggerFactory.getLogger(UserConsumer.class);
 
-    @PostConstruct
-    public void init() {
-        logger.error("UserConsumer initialized and ready to consume messages from Kafka topic.");
+    private final UserService userService;
+
+    @Autowired
+    public UserConsumer(UserService userService) {
+        this.userService = userService;
     }
 
     @KafkaListener(topics = "user_topic", groupId = "user-group")
     public void consume(UserEvent userEvent) {
-        System.out.println("### Consumed message: " + userEvent);
         logger.error("Consumed message: {}", userEvent);
-        // Process the userEvent as needed
+        if ("CREATE".equals(userEvent.getEventType())) {
+            UserDto userDto = userEvent.getUserData();
+            User user = new User(userDto);
+            userService.createUser(user);
+            logger.info("User created: {}", user);
+        }
+        // Handle other event types as needed
+        else if ("UPDATE".equals(userEvent.getEventType())) {
+            UserDto userDto = userEvent.getUserData();
+            User user = new User(userDto);
+            userService.updateUser(user);
+            logger.info("User updated: {}", user);
+        }
+        else if ("DELETE".equals(userEvent.getEventType())) {
+            Long userId = userEvent.getUserId();
+            userService.deleteUser(userId);
+            logger.info("User deleted with ID: {}", userId);
+        }
     }
 }
