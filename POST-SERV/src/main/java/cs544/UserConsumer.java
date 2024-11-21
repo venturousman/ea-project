@@ -23,6 +23,7 @@ public class UserConsumer {
 
     @KafkaListener(topics = "user_topic", groupId = "user-group")
     public void consume(UserEvent userEvent) {
+        System.out.println("Consumed message: {}"+ userEvent);
         if ("CREATE".equals(userEvent.getEventType())) {
             UserDto userDto = userEvent.getUserData();
             User user = new User(userDto);
