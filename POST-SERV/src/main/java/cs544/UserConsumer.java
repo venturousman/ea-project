@@ -33,7 +33,10 @@ public class UserConsumer {
         // Handle other event types as needed
         else if ("UPDATE".equals(userEvent.getEventType())) {
             UserDto userDto = userEvent.getUserData();
-            User user = new User(userDto);
+            // find user by username
+            User user = userService.findByEmail(userDto.getEmail());
+            user.setFirstname(userDto.getFirstname());
+            user.setLastname(userDto.getLastname());
             userService.updateUser(user);
             System.out.println("User updated: {}"+ user);
         }

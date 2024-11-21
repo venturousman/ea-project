@@ -5,6 +5,8 @@ import java.io.Serializable;
 public class UserEvent implements Serializable {
     private String eventType; // CREATE, UPDATE, DELETE
     private Long userId;
+    // make this optional for DELETE
+
     private UserDto userData; // Include details for CREATE/UPDATE
     private long timestamp;
 
@@ -23,7 +25,6 @@ public class UserEvent implements Serializable {
         return "UserEvent{" +
                 "eventType='" + eventType + '\'' +
                 ", userId=" + userId +
-                ", userData=" + userData.toString() +
                 ", timestamp=" + timestamp +
                 '}';
     }
