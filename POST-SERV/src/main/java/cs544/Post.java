@@ -1,7 +1,6 @@
 package cs544;
 
 import jakarta.persistence.*;
-import  cs544.User;
 
 @Entity
 public class Post {
@@ -12,7 +11,6 @@ public class Post {
     private String content;
     @ManyToOne
     private User user;
-
 
     // Getters and Setters
     public Long getId() {
